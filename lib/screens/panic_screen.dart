@@ -10,6 +10,7 @@ class PanicScreen extends StatelessWidget {
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         title: const Text("🚨 Panic Alert Sent"),
         content: Text(
           "Tourist ID: $touristId\n"
@@ -28,20 +29,37 @@ class PanicScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: ElevatedButton.icon(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.red,
-          foregroundColor: Colors.white,
-          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30),
-          ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Text(
+          "Press the button below in case of emergency",
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+          textAlign: TextAlign.center,
         ),
-        icon: const Icon(Icons.sos, size: 32),
-        label: const Text("PANIC BUTTON", style: TextStyle(fontSize: 20)),
-        onPressed: () => _sendPanic(context),
-      ),
+        const SizedBox(height: 40),
+
+        // Circular Panic Button
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.red,
+            foregroundColor: Colors.white,
+            shape: const CircleBorder(),
+            padding: const EdgeInsets.all(60), // bigger circular button
+            elevation: 10,
+            shadowColor: Colors.redAccent,
+          ),
+          onPressed: () => _sendPanic(context),
+          child: const Icon(Icons.sos, size: 60),
+        ),
+
+        const SizedBox(height: 20),
+        const Text(
+          "Your Tourist ID & live GPS will be shared automatically.",
+          style: TextStyle(fontSize: 14, color: Colors.white70),
+          textAlign: TextAlign.center,
+        ),
+      ],
     );
   }
 }

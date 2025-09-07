@@ -10,27 +10,31 @@ class IdWalletScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Card(
-        margin: const EdgeInsets.all(20),
-        elevation: 4,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        elevation: 6,
+        color: Theme.of(context).cardColor,
         child: Padding(
           padding: const EdgeInsets.all(24),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text(
-                "Tourist Digital ID",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
+              const Text("Tourist Digital ID",
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
               const SizedBox(height: 20),
               QrImageView(
                 data: touristId,
-                size: 150,
+                size: 180,
+                backgroundColor: Colors.white,
               ),
               const SizedBox(height: 20),
-              Text("ID: $touristId"),
+              Text("ID: $touristId",
+                  style: const TextStyle(
+                      fontSize: 16, fontWeight: FontWeight.w500)),
               const SizedBox(height: 10),
-              const Text("Blockchain Proof: Verified ✅",
-                  style: TextStyle(color: Colors.green)),
+              Text(
+                "Blockchain Proof: Verified ✅",
+                style: TextStyle(color: Colors.green.shade400, fontSize: 14),
+              ),
             ],
           ),
         ),
