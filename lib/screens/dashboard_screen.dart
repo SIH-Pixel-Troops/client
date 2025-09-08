@@ -1,11 +1,47 @@
 import 'package:flutter/material.dart';
+import '../services/api_service.dart';
 import '../widgets/score_card.dart';
 
-class DashboardScreen extends StatelessWidget {
+class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
 
-  final int safetyScore = 82;
-  final bool isInHighRiskZone = true;
+  @override
+  State<DashboardScreen> createState() => _DashboardScreenState();
+}
+
+class _DashboardScreenState extends State<DashboardScreen> {
+  int safetyScore = 0;
+  String alertMessage = "";
+  bool isLoading = true;
+  final String touristId = "TOURIST-ABC123";
+
+  Future<void> _fetchLocationUpdate() async {
+    setState(() => isLoading = true);
+
+    try {
+      final data = await ApiService.sendLocation(touristId);
+      setState(() {
+        safetyScore = data["safetyScore"];
+        if (data["alerts"] != null && data["alerts"].isNotEmpty) {
+          alertMessage = data["alerts"][0]["message"];
+        } else {
+          alertMessage = "";
+        }
+      });
+    } catch (e) {
+      setState(() {
+        alertMessage = "❌ Failed to fetch location: $e";
+      });
+    } finally {
+      setState(() => isLoading = false);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchLocationUpdate();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,12 +50,14 @@ class DashboardScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // Safety Score Card
-          ScoreCard(score: safetyScore),
+          // Safety Score
+          isLoading
+              ? const Center(child: CircularProgressIndicator())
+              : ScoreCard(score: safetyScore),
           const SizedBox(height: 24),
 
           // High-risk Zone Alert
-          if (isInHighRiskZone)
+          if (alertMessage.isNotEmpty)
             Card(
               elevation: 4,
               shape: RoundedRectangleBorder(
@@ -35,7 +73,7 @@ class DashboardScreen extends StatelessWidget {
                     const SizedBox(width: 12),
                     Expanded(
                       child: Text(
-                        "⚠️ Alert: You are in a high-risk zone!",
+                        alertMessage,
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -50,7 +88,7 @@ class DashboardScreen extends StatelessWidget {
 
           const SizedBox(height: 16),
 
-          // Extra Info (Optional)
+          // Travel Advisory
           Card(
             elevation: 2,
             shape: RoundedRectangleBorder(
@@ -62,8 +100,7 @@ class DashboardScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text("Travel Advisory",
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                   SizedBox(height: 8),
                   Text(
                     "Avoid isolated areas after dark and follow local authority guidelines for safer travel.",
@@ -72,6 +109,15 @@ class DashboardScreen extends StatelessWidget {
                 ],
               ),
             ),
+          ),
+
+          const SizedBox(height: 20),
+
+          // Refresh Button
+          ElevatedButton.icon(
+            onPressed: _fetchLocationUpdate,
+            icon: const Icon(Icons.refresh),
+            label: const Text("Update Location"),
           ),
         ],
       ),
