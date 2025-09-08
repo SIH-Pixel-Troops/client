@@ -12,7 +12,7 @@ class HomeScreen extends StatelessWidget {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Tourist Safety App"),
+          title: const Text("Safar Suraksha"),
           bottom: const TabBar(
             tabs: [
               Tab(icon: Icon(Icons.badge), text: "ID Wallet"),

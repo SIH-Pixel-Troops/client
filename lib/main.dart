@@ -12,7 +12,7 @@ class TouristSafetyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Tourist Safety App',
+      title: 'Safar Suraksha',
       theme: ThemeData(
         textTheme: GoogleFonts.poppinsTextTheme(ThemeData.light().textTheme),
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
