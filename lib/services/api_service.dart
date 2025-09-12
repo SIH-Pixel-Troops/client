@@ -3,10 +3,9 @@ import 'package:http/http.dart' as http;
 import 'package:geolocator/geolocator.dart';
 
 class ApiService {
-  // ⚠️ Change this if testing on physical device
   // iOS Simulator -> "http://localhost:3000"
   // Android Emulator -> "http://10.0.2.2:3000"
-  // Real Device -> "http://<YOUR_LOCAL_IP>:3000"
+  // Real Device -> "http://<LocalAPI>:3000"
   static const String baseUrl = "http://localhost:3000";
 
   /// Get current GPS location
@@ -73,6 +72,27 @@ class ApiService {
       return jsonDecode(response.body);
     } else {
       throw Exception("Failed to send panic alert: ${response.statusCode}");
+    }
+  }
+
+  // Generate tourist ID : backend
+  static Future<Map<String, dynamic>> generateTouristId(
+      String touristId, String name, String tripStart, String tripEnd) async {
+    final response = await http.post(
+      Uri.parse("$baseUrl/api/generate-id"),
+      headers: {"Content-Type": "application/json"},
+      body: jsonEncode({
+        "touristId": touristId,
+        "name": name,
+        "tripStart": tripStart,
+        "tripEnd": tripEnd,
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception("Failed to generate tourist ID");
     }
   }
 }
