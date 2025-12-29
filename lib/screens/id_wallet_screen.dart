@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import '../services/api_service.dart';
@@ -20,28 +22,41 @@ class _IdWalletScreenState extends State<IdWalletScreen> {
     _generateQr();
   }
 
-  Future<void> _generateQr() async {
-    try {
-      final data = await ApiService.generateTouristId(
-        "TOURIST-ABC123",
-        "John Doe",
-        "2025-09-08",
-        "2025-09-15",
-      );
+Future<void> _generateQr() async {
+  try {
+    final data = await ApiService.generateTouristId(
+      "TOURIST-ABC123",
+      "John Doe",
+      "2025-09-08",
+      "2025-09-15",
+    );
 
-      setState(() {
-        qrData = data["qrPayload"];
-        blockchainProof = data["blockchainProof"];
-        isLoading = false;
-      });
-    } catch (e) {
-      setState(() {
-        isLoading = false;
-        qrData = null;
-        blockchainProof = null;
-      });
-    }
+    // ✅ Frontend constructs QR payload
+    final qrPayload = jsonEncode({
+      "touristId": data["touristId"],
+      "name": data["name"],
+      "tripStart": data["tripStart"],
+      "tripEnd": data["tripEnd"],
+      "transactionHash": data["transactionHash"],
+      "proof": data["blockchainProof"],
+      "mode": data["mode"]
+    });
+
+    setState(() {
+      qrData = qrPayload;
+      blockchainProof = data["blockchainProof"];
+      isLoading = false;
+    });
+  } catch (e) {
+    setState(() {
+      isLoading = false;
+      qrData = null;
+      blockchainProof = null;
+    });
   }
+}
+
+
 
   @override
   Widget build(BuildContext context) {
