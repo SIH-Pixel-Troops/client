@@ -6,7 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 class ApiService {
   /// Production backend URL
   static const String baseUrl =
-      "https://backend-safarsuraksha.onrender.com";
+      "10.0.2.2:3000"; // Use localhost for Android emulator
 
   // ============================
   // 🔐 Headers (Firebase Auth)
