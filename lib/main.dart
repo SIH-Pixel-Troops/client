@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'screens/home_screen.dart';
+import 'package:safar_suraksha/screens/login_page.dart';
 
 void main() {
   runApp(const TouristSafetyApp());
@@ -26,7 +26,7 @@ class TouristSafetyApp extends StatelessWidget {
         ),
       ),
       themeMode: ThemeMode.system,
-      home: const HomeScreen(),
+      home: const LoginPage(),
       debugShowCheckedModeBanner: false,
     );
   }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'id_wallet_screen.dart';
 import 'dashboard_screen.dart';
 import 'panic_screen.dart';
+import 'login_page.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -13,6 +14,17 @@ class HomeScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Safar Suraksha"),
+          actions: [
+            IconButton(
+              tooltip: 'Logout',
+              icon: const Icon(Icons.logout),
+              onPressed: () {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (_) => const LoginPage()),
+                );
+              },
+            ),
+          ],
           bottom: const TabBar(
             tabs: [
               Tab(icon: Icon(Icons.badge), text: "ID Wallet"),

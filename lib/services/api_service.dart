@@ -6,7 +6,7 @@ class ApiService {
   // iOS Simulator -> "http://localhost:3000"
   // Android Emulator -> "http://10.0.2.2:3000"
   // Real Device -> "http://<LocalAPI>:3000"
-  static const String baseUrl = "http://localhost:3000";
+  static const String baseUrl = "https://backend-safarsuraksha.onrender.com";
 
   /// Get current GPS location
   static Future<Position> getCurrentLocation() async {
