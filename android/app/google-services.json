@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "577932282164",
+    "project_id": "safarsuraksha",
+    "storage_bucket": "safarsuraksha.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:577932282164:android:4fa0e65f0c54e522af7d61",
+        "android_client_info": {
+          "package_name": "com.example.client"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1Z9mg4sedmDRfPKPQesq4I5owkfSLnF4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

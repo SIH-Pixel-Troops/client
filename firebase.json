@@ -1,16 +1,1 @@
-{
-  "hosting": {
-    "public": "build/web",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ]
-  }
-}
+{"hosting":{"public":"build/web","ignore":["firebase.json","**/.*","**/node_modules/**"],"rewrites":[{"source":"**","destination":"/index.html"}]},"flutter":{"platforms":{"android":{"default":{"projectId":"safarsuraksha","appId":"1:577932282164:android:4fa0e65f0c54e522af7d61","fileOutput":"android/app/google-services.json"}},"ios":{"default":{"projectId":"safarsuraksha","appId":"1:577932282164:ios:eb19b7bbf434e3c4af7d61","uploadDebugSymbols":false,"fileOutput":"ios/Runner/GoogleService-Info.plist"}},"macos":{"default":{"projectId":"safarsuraksha","appId":"1:577932282164:ios:6370b58cc985538caf7d61","uploadDebugSymbols":false,"fileOutput":"macos/Runner/GoogleService-Info.plist"}},"dart":{"lib/firebase_options.dart":{"projectId":"safarsuraksha","configurations":{"android":"1:577932282164:android:4fa0e65f0c54e522af7d61","ios":"1:577932282164:ios:eb19b7bbf434e3c4af7d61","macos":"1:577932282164:ios:6370b58cc985538caf7d61","web":"1:577932282164:web:d0f07d0fc6103c76af7d61","windows":"1:577932282164:web:d8887785eee274e9af7d61"}}}}}}
